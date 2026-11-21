@@ -40,6 +40,10 @@ def get_build_flavor(product_config):
   return build_flavor
 
 def get_build_keys(product_config):
+  # Make uses this same tag for its build fingerprint.
+  build_keys = product_config.get("BuildKeys")
+  if build_keys:
+    return build_keys
   default_cert = product_config.get("DefaultAppCertificate", "")
   if default_cert == "" or default_cert == os.path.join(TEST_KEY_DIR, "testKey"):
     return "test-keys"
